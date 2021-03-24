@@ -59,4 +59,8 @@ public class MineGenerator {
     public int getHeight() {
         return height;
     }
+
+    public Tile[][] getTiles() {
+        return tiles;
+    }
 }

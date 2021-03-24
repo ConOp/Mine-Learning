@@ -14,12 +14,18 @@ public class SettingsManager {
         chromosomeLength=10;
         agentsPerGeneration=200;
         generations=500;
+        moveScore=0;
         obstacleScore=-5;
+        gemCollectScore=5;
+        invalidGemCollectScore=-2;
     }
     int chromosomeLength;
     int agentsPerGeneration;
     int generations;
+    int moveScore;
     int obstacleScore;
+    int gemCollectScore;
+    int invalidGemCollectScore;
 
     public void setChromosomeLength(int chromosomeLength) {
         this.chromosomeLength = chromosomeLength;
@@ -49,7 +55,19 @@ public class SettingsManager {
         return generations;
     }
 
+    public int getMoveScore() {
+        return moveScore;
+    }
+
     public int getObstacleScore() {
         return obstacleScore;
+    }
+
+    public int getGemCollectScore() {
+        return gemCollectScore;
+    }
+
+    public int getInvalidGemCollectScore() {
+        return invalidGemCollectScore;
     }
 }
