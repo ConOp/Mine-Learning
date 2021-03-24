@@ -1,4 +1,4 @@
-package Mechanics;
+package Mechanics.Mine;
 
 import javax.swing.*;
 

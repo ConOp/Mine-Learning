@@ -1,12 +1,7 @@
 package UI;
-import Mechanics.MineGenerator;
-import Mechanics.Tile;
+import Mechanics.Mine.MineGenerator;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class MainWindow {
 
@@ -20,6 +15,10 @@ public class MainWindow {
     }
 
     JFrame mainFrame;
+
+    /***
+     * Initializes the main window of the simulation.
+     */
     public void InitializeWindow(){
         mainFrame = new JFrame("Mine Learning");
         mainFrame.setSize(1024,760);
@@ -29,9 +28,9 @@ public class MainWindow {
         GenerateSettings();
     }
 
-    public JFrame getMainFrame() {
-        return mainFrame;
-    }
+    /***
+     * Generates the settings of the simulation in the main window.
+     */
     void GenerateSettings(){
         JButton generateButton = new JButton("Generate");
         generateButton.setBounds(900,50,100,50);
@@ -40,6 +39,9 @@ public class MainWindow {
             MineGenerator.getInstance().GenerateGems();
         });
         mainFrame.add(generateButton);
+    }
 
+    public JFrame getMainFrame() {
+        return mainFrame;
     }
 }

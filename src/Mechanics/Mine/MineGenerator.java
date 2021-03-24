@@ -1,9 +1,8 @@
-package Mechanics;
+package Mechanics.Mine;
 
 import UI.MainWindow;
 
 import java.awt.*;
-import java.util.Random;
 
 public class MineGenerator {
     public static MineGenerator instance;
@@ -53,5 +52,11 @@ public class MineGenerator {
                 tiles[i][j].RemoveGem();
             }
         }
+    }
+    public int getWidth() {
+        return width;
+    }
+    public int getHeight() {
+        return height;
     }
 }
