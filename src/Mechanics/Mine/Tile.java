@@ -1,18 +1,33 @@
 package Mechanics.Mine;
 
-import javax.swing.*;
-
-public class Tile extends JLabel {
+public class Tile {
     boolean containsGem;
+    public Tile(Tile copied){
+        this.containsGem=copied.containsGem;
+    }
+    public Tile(){
+        containsGem=false;
+    }
+
+    /***
+     * Adds a gem to the tile.
+     */
     public void AddGem(){
         containsGem=true;
-        this.setIcon(new ImageIcon("Resources/gem.png"));
     }
+    /***
+     * Removes the gem from the tile.
+     */
     public void RemoveGem(){
         containsGem=false;
-        this.setIcon(null);
     }
+
+    /***
+     * Checks whether a tiles is containing a gem.
+     * @return True if tile is containing a gem, False if not.
+     */
     public boolean  isContainingGem(){
         return containsGem;
     }
+
 }

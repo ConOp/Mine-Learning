@@ -1,5 +1,5 @@
 package UI;
-import Mechanics.Mine.MineGenerator;
+import Utility.SimulationManager;
 
 import javax.swing.*;
 
@@ -15,6 +15,7 @@ public class MainWindow {
     }
 
     JFrame mainFrame;
+    CustomLabel[][] labelGrid;
 
     /***
      * Initializes the main window of the simulation.
@@ -32,16 +33,21 @@ public class MainWindow {
      * Generates the settings of the simulation in the main window.
      */
     void GenerateSettings(){
-        JButton generateButton = new JButton("Generate");
-        generateButton.setBounds(900,50,100,50);
-        generateButton.setVisible(true);
-        generateButton.addActionListener(e -> {
-            MineGenerator.getInstance().GenerateGems();
+        JButton simulateButton = new JButton("Simulate Best Agent");
+        simulateButton.setBounds(700,110,200,50);
+        simulateButton.setVisible(true);
+        simulateButton.addActionListener(e -> {
+            VisualOperationManager.getInstance().ShowMine();
+            VisualOperationManager.getInstance().SimulateAgentsActions(SimulationManager.getInstance().getGenerations()[SimulationManager.getInstance().getCurrentGeneration()].GetBestAgent());
         });
-        mainFrame.add(generateButton);
+        mainFrame.add(simulateButton);
     }
 
     public JFrame getMainFrame() {
         return mainFrame;
+    }
+
+    public CustomLabel[][] getLabelGrid() {
+        return labelGrid;
     }
 }

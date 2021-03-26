@@ -1,8 +1,6 @@
 package Mechanics.Mine;
 
-import UI.MainWindow;
-
-import java.awt.*;
+import Utility.SettingsManager;
 
 public class MineGenerator {
     public static MineGenerator instance;
@@ -14,50 +12,47 @@ public class MineGenerator {
         return instance;
     }
 
-    int width=10;
-    int height=10;
-    int imageLabelOffset=5;
-    int imageLabelWidth=64;
-    int imageLabelHeight=64;
-    float gemChance=0.3f;
+
     Tile[][] tiles;
-    public void GenerateMine() {
-        tiles=new Tile[height][width];
-        for (int y = 5, i = 0; i < height; i++, y += imageLabelHeight + imageLabelOffset) {
-            for (int x = 10, j = 0; j < width; j++, x += imageLabelWidth + imageLabelOffset) {
-                Tile newTile = new Tile();
-                newTile.setBackground(Color.lightGray);
-                newTile.setOpaque(true);
-                newTile.setBounds(x, y, imageLabelWidth, imageLabelHeight);
-                newTile.setVisible(true);
-                MainWindow.getInstance().getMainFrame().add(newTile);
-                tiles[i][j] = newTile;
+
+    /***
+     * Generates the main mine.
+     */
+    public void  GenerateMine(){
+        ClearMine();
+        tiles=new Tile[SettingsManager.height][SettingsManager.width];
+        for(int i = 0; i< SettingsManager.height; i++){
+            for(int j=0;j<SettingsManager.width;j++){
+                tiles[i][j]=new Tile();
             }
         }
-        MainWindow.getInstance().getMainFrame().repaint();
     }
+
+    /***
+     * Generates the gems in the mine.
+     */
     public void GenerateGems(){
         ClearMine();
-        for(int i=0;i<height;i++){
-            for(int j=0;j<width;j++){
-                if(Math.random()<=gemChance){
+        for(int i = 0; i< SettingsManager.height; i++){
+            for(int j=0;j<SettingsManager.width;j++){
+                if(Math.random()<=SettingsManager.gemChance){
                     tiles[i][j].AddGem();
                 }
             }
         }
     }
+
+    /***
+     * Clears the mine from gems.
+     */
     void ClearMine(){
-        for(int i=0;i<height;i++){
-            for(int j=0;j<width;j++){
-                tiles[i][j].RemoveGem();
+        if(tiles!=null) {
+            for (int i = 0; i < SettingsManager.height; i++) {
+                for (int j = 0; j < SettingsManager.width; j++) {
+                    tiles[i][j].RemoveGem();
+                }
             }
         }
-    }
-    public int getWidth() {
-        return width;
-    }
-    public int getHeight() {
-        return height;
     }
 
     public Tile[][] getTiles() {

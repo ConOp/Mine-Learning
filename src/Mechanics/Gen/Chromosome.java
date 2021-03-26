@@ -13,4 +13,8 @@ public class Chromosome {
             chromosome[i]= random.nextInt(Action.values().length);
         }
     }
+
+    public int[] getChromosome() {
+        return chromosome;
+    }
 }

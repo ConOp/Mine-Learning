@@ -1,18 +1,14 @@
-import Mechanics.Gen.Action;
-import Mechanics.Gen.Agent;
 import Mechanics.Mine.MineGenerator;
 import UI.MainWindow;
-import Utility.AgentsManager;
-import Utility.SettingsManager;
+import Utility.SimulationManager;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainClass {
     public static void main(String[] args) {
         MainWindow.getInstance().InitializeWindow();
         MineGenerator.getInstance().GenerateMine();
         MineGenerator.getInstance().GenerateGems();
-        AgentsManager.getInstance().GenerateAgents();
-        AgentsManager.getInstance().ExecuteAllAgentActions();
+        SimulationManager.getInstance().StartSimulation();
     }
 }

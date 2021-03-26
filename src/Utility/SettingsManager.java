@@ -2,72 +2,19 @@ package Utility;
 
 
 public class SettingsManager {
-    public static SettingsManager instance;
-    public static SettingsManager getInstance(){
-        if(instance==null){
-            instance=new SettingsManager();
-            return instance;
-        }
-        return instance;
-    }
-    SettingsManager(){
-        chromosomeLength=10;
-        agentsPerGeneration=200;
-        generations=500;
-        moveScore=0;
-        obstacleScore=-5;
-        gemCollectScore=5;
-        invalidGemCollectScore=-2;
-    }
-    int chromosomeLength;
-    int agentsPerGeneration;
-    int generations;
-    int moveScore;
-    int obstacleScore;
-    int gemCollectScore;
-    int invalidGemCollectScore;
 
-    public void setChromosomeLength(int chromosomeLength) {
-        this.chromosomeLength = chromosomeLength;
-    }
+    public static int chromosomeLength=5;
+    public static int agentsPerGeneration=200;
+    public static int generations=500;
+    public static int moveScore=0;
+    public static int obstacleScore=-5;
+    public static int gemCollectScore=5;
+    public static int invalidGemCollectScore=-2;
+    public static int width=9;
+    public static int height=10;
+    public static int imageLabelOffset=5;
+    public static int imageLabelWidth=64;
+    public static int imageLabelHeight=64;
+    public static float gemChance=0.3f;
 
-    public void setAgentsPerGeneration(int agentsPerGeneration) {
-        this.agentsPerGeneration = agentsPerGeneration;
-    }
-
-    public void setGenerations(int generations) {
-        this.generations = generations;
-    }
-
-    public void setObstacleScore(int obstacleScore) {
-        this.obstacleScore = obstacleScore;
-    }
-
-    public int getChromosomeLength() {
-        return chromosomeLength;
-    }
-
-    public int getAgentsPerGeneration() {
-        return agentsPerGeneration;
-    }
-
-    public int getGenerations() {
-        return generations;
-    }
-
-    public int getMoveScore() {
-        return moveScore;
-    }
-
-    public int getObstacleScore() {
-        return obstacleScore;
-    }
-
-    public int getGemCollectScore() {
-        return gemCollectScore;
-    }
-
-    public int getInvalidGemCollectScore() {
-        return invalidGemCollectScore;
-    }
 }
