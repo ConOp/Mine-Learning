@@ -1,13 +1,13 @@
 package Mechanics.Gen;
-
 import Utility.SettingsManager;
 
 public class Generation {
     Agent[] agents;
+    int index;
 
     public Generation(){
         agents= new Agent[SettingsManager.agentsPerGeneration];
-        GenerateAgents();
+        index=0;
     }
 
     /***
@@ -19,6 +19,14 @@ public class Generation {
         }
     }
 
+    public float GetMean(){
+        float sum =0;
+        for (Agent agent : agents) {
+            sum += agent.getScore();
+        }
+        return  sum/agents.length;
+    }
+
     /***
      * Generate all new agents of the generation.
      */
@@ -27,7 +35,6 @@ public class Generation {
             agents[i]=new Agent();
         }
     }
-
     /***
      * Gets the best agent depending on the score in the current generation.
      * @return The best agent in generation.
@@ -43,5 +50,12 @@ public class Generation {
         }
         return agents[index];
     }
+    public void AddAgent(Agent agent){
+        agents[index]=agent;
+        index++;
+    }
 
+    public Agent[] getAgents() {
+        return agents;
+    }
 }

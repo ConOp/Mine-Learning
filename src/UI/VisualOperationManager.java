@@ -2,10 +2,7 @@ package UI;
 import Mechanics.Gen.Action;
 import Mechanics.Gen.Agent;
 import Mechanics.Mine.MineGenerator;
-import Mechanics.Mine.Tile;
 import Utility.SettingsManager;
-import com.sun.tools.javac.Main;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -33,8 +30,8 @@ public class VisualOperationManager {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            for (int i = 0; i < agent.getChromosome().getChromosome().length; i++) {
-                Action.values()[agent.getChromosome().getChromosome()[i]].ExecuteVisualAction(agent);
+            for (int i = 0; i < agent.getChromosome().length; i++) {
+                Action.values()[agent.getChromosome()[i]].ExecuteVisualAction(agent);
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {

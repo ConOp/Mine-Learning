@@ -1,7 +1,6 @@
 package Mechanics.Gen;
 import UI.MainWindow;
 import Utility.SettingsManager;
-
 import javax.swing.*;
 
 public enum Action {
@@ -92,12 +91,12 @@ public enum Action {
         }
     },
     MINE_GEM{
-        public boolean isValidAction(Agent agent) {return agent.localMine[agent.position.x][agent.position.y].isContainingGem();}
+        public boolean isValidAction(Agent agent) {return agent.localMine[agent.position.y][agent.position.x].isContainingGem();}
         @Override
         public void ExecuteAction(Agent agent) {
             if(isValidAction(agent)) {
                 agent.ModifyScore(SettingsManager.gemCollectScore);
-                agent.localMine[agent.position.x][agent.position.y].RemoveGem();
+                agent.localMine[agent.position.y][agent.position.x].RemoveGem();
 
             }
             else {

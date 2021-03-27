@@ -3,16 +3,28 @@ import Mechanics.Mine.MineGenerator;
 import Mechanics.Mine.Tile;
 import Utility.SettingsManager;
 import java.awt.*;
+import java.util.Random;
 
 public class Agent {
-    Chromosome chromosome;
+    int[] chromosome;
     public Point position;
     int score;
     Tile[][]localMine;
 
     public Agent(){
         position=new Point(0,0);
-        chromosome = new Chromosome(SettingsManager.chromosomeLength);
+        Random random = new Random();
+        //Generate Random chromosomes for the first generation.
+        chromosome=new int[SettingsManager.chromosomeLength];
+        for(int i = 0; i< SettingsManager.chromosomeLength; i++){
+            chromosome[i]= random.nextInt(Action.values().length);
+        }
+        score=0;
+        InitializeLocalMine();
+    }
+    public Agent(int[] chromosome){
+        position=new Point(0,0);
+        this.chromosome = chromosome;
         score=0;
         InitializeLocalMine();
     }
@@ -21,8 +33,8 @@ public class Agent {
      * Executes all actions stored in agent's chromosome.
      */
     public void ExecuteAllActions(){
-        for(int i=0; i<chromosome.chromosome.length;i++){
-            Action.values()[chromosome.chromosome[i]].ExecuteAction(this);
+        for(int i=0; i<chromosome.length;i++){
+            Action.values()[chromosome[i]].ExecuteAction(this);
         }
     }
 
@@ -50,7 +62,7 @@ public class Agent {
         return score;
     }
 
-    public Chromosome getChromosome() {
+    public int[] getChromosome() {
         return chromosome;
     }
 }

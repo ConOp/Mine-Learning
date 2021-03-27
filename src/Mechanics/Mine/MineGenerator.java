@@ -1,5 +1,4 @@
 package Mechanics.Mine;
-
 import Utility.SettingsManager;
 
 public class MineGenerator {

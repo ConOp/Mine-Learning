@@ -1,6 +1,5 @@
 package UI;
 import Utility.SimulationManager;
-
 import javax.swing.*;
 
 public class MainWindow {
