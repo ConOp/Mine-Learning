@@ -22,6 +22,7 @@ public enum CrossOver {
             children[1]=new Agent(secondChildChromosome);
             return children;
         }
+
     };
 
     /***

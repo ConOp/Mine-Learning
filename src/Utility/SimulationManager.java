@@ -1,5 +1,8 @@
 package Utility;
 import Mechanics.Gen.*;
+import UI.MainWindow;
+import com.sun.tools.javac.Main;
+
 import java.util.Random;
 
 public class SimulationManager {
@@ -18,6 +21,8 @@ public class SimulationManager {
      * Starts the whole simulation.
      */
     public void StartSimulation(){
+        MainWindow.getInstance().chartButton.setEnabled(false);
+        MainWindow.getInstance().simulateButton.setEnabled(false);
         generations=new Generation[SettingsManager.generations];
         currentGeneration=0;
         generations[0]=new Generation();
@@ -36,6 +41,9 @@ public class SimulationManager {
                 System.out.println("Best agent fitness generation: " + currentGeneration + " fitness: " + generations[i].GetBestAgent().getScore()+" Mean Fitness: "+generations[i].GetMean());
             }
         }
+        MainWindow.getInstance().startButton.setEnabled(true);
+        MainWindow.getInstance().chartButton.setEnabled(true);
+        MainWindow.getInstance().simulateButton.setEnabled(true);
     }
 
     /***
@@ -62,4 +70,5 @@ public class SimulationManager {
     public int getCurrentGeneration() {
         return currentGeneration;
     }
+
 }
