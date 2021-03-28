@@ -26,14 +26,14 @@ public class VisualOperationManager {
         new Thread(() -> {
             MainWindow.getInstance().getLabelGrid()[0][0].setIcon(new ImageIcon("Resources/agent.png"));
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             for (int i = 0; i < agent.getChromosome().length; i++) {
                 Action.values()[agent.getChromosome()[i]].ExecuteVisualAction(agent);
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

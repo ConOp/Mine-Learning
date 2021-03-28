@@ -13,6 +13,7 @@ public class MineGenerator {
 
 
     Tile[][] tiles;
+    int spawnedGems;
 
     /***
      * Generates the main mine.
@@ -31,11 +32,13 @@ public class MineGenerator {
      * Generates the gems in the mine.
      */
     public void GenerateGems(){
+        spawnedGems=0;
         ClearMine();
         for(int i = 0; i< SettingsManager.height; i++){
             for(int j=0;j<SettingsManager.width;j++){
                 if(Math.random()<=SettingsManager.gemChance){
                     tiles[i][j].AddGem();
+                    spawnedGems++;
                 }
             }
         }
@@ -56,5 +59,9 @@ public class MineGenerator {
 
     public Tile[][] getTiles() {
         return tiles;
+    }
+
+    public int getSpawnedGems() {
+        return spawnedGems;
     }
 }

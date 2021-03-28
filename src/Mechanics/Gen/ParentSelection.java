@@ -1,6 +1,7 @@
 package Mechanics.Gen;
 import Utility.SettingsManager;
 import Utility.SimulationManager;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
@@ -15,9 +16,9 @@ public enum ParentSelection {
             int parentIndex=0;
             while (parentIndex<2){
                 while(contestants.size()<SettingsManager.tournamentContestantsNumber) {
-                    int randomIndex=random.nextInt(SettingsManager.agentsPerGeneration);
-                    if(!contestants.contains(SimulationManager.getInstance().getGenerations()[i].getAgents()[randomIndex])){
-                        contestants.add(SimulationManager.getInstance().getGenerations()[i].getAgents()[randomIndex]);
+                    int randomIndex=random.nextInt(SettingsManager.agentsPerGeneration-1);
+                    if(!contestants.contains(SimulationManager.getInstance().getGenerations().get(0).getAgents()[randomIndex])){
+                        contestants.add(SimulationManager.getInstance().getGenerations().get(0).getAgents()[randomIndex]);
                     }
                 }
                 contestants.sort(Comparator.comparing(Agent::getScore));

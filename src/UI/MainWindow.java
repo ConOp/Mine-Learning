@@ -26,7 +26,7 @@ public class MainWindow {
     public void InitializeWindow(){
         mainFrame = new JFrame("Mine Learning");
         mainFrame.setSize(1024,760);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setLayout(null);
         mainFrame.setVisible(true);
         GenerateSettings();
@@ -53,7 +53,7 @@ public class MainWindow {
         simulateButton.setEnabled(false);
         simulateButton.addActionListener(e -> {
             VisualOperationManager.getInstance().ShowMine();
-            VisualOperationManager.getInstance().SimulateAgentsActions(SimulationManager.getInstance().getGenerations()[SimulationManager.getInstance().getCurrentGeneration()].GetBestAgent());
+            VisualOperationManager.getInstance().SimulateAgentsActions(SimulationManager.getInstance().getGenerations().get(0).GetBestAgent());
         });
         chartButton = new JButton("Show Chart");
         chartButton.setBounds(700,170,200,50);

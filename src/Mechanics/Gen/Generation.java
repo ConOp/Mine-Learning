@@ -1,6 +1,9 @@
 package Mechanics.Gen;
 import Utility.SettingsManager;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 public class Generation {
     Agent[] agents;
     int index;
@@ -17,6 +20,7 @@ public class Generation {
         for (Agent agent : agents) {
             agent.ExecuteAllActions();
         }
+        Arrays.sort(agents, Comparator.comparing(Agent::getScore));
     }
 
     public float GetMean(){

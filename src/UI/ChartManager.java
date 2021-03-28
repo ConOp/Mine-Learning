@@ -1,23 +1,26 @@
 package UI;
 
+import Mechanics.Mine.MineGenerator;
 import Utility.SettingsManager;
 import Utility.SimulationManager;
 import org.knowm.xchart.*;
 import org.knowm.xchart.style.Styler;
-import org.knowm.xchart.style.markers.SeriesMarkers;
+
+import javax.swing.*;
 
 public class ChartManager {
+    static int i=0;
+    static double[]best;
+    static double[]mean;
     /***
      * Generates fitness graph.
      */
     public static void GenerateChart(){
-        double[]mean = new double[SettingsManager.generations];
-        double[]best = new double[SettingsManager.generations];
         double[]generation = new double[SettingsManager.generations];
+        double[]bestScore = new double[SettingsManager.generations];
         for(int i=0;i<SettingsManager.generations;i++){
-            mean[i]=SimulationManager.getInstance().getGenerations()[i].GetMean();
-            best[i]=SimulationManager.getInstance().getGenerations()[i].GetBestAgent().getScore();
             generation[i]=i;
+            bestScore[i]= MineGenerator.getInstance().getSpawnedGems()*SettingsManager.gemCollectScore;
         }
         // Create Chart
         XYChart chart =new XYChartBuilder()
@@ -30,8 +33,20 @@ public class ChartManager {
                 .build();
         chart.addSeries("Mean Fitness",generation,mean);
         chart.addSeries("Best Agent Fitness",generation,best);
+        chart.addSeries("Best Possible Fitness",generation,bestScore);
+        new SwingWrapper<>(chart).displayChart().setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 
-        new SwingWrapper<>(chart).displayChart();
-
+    }
+    public static void AddToBestPerGeneration(int bestScore){
+        best[i]=bestScore;
+    }
+    public static void AddToMean(float meanScore){
+        mean[i]=meanScore;
+        i++;
+    }
+    public static void Reset(){
+        i=0;
+        best=new double[SettingsManager.generations];
+        mean = new double[SettingsManager.generations];
     }
 }

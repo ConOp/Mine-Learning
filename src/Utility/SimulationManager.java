@@ -1,8 +1,10 @@
 package Utility;
 import Mechanics.Gen.*;
+import Mechanics.Mine.MineGenerator;
+import UI.ChartManager;
 import UI.MainWindow;
-import com.sun.tools.javac.Main;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class SimulationManager {
@@ -14,7 +16,7 @@ public class SimulationManager {
         }
         return instance;
     }
-    Generation[] generations;
+    ArrayList<Generation> generations;
     int currentGeneration;
 
     /***
@@ -23,23 +25,32 @@ public class SimulationManager {
     public void StartSimulation(){
         MainWindow.getInstance().chartButton.setEnabled(false);
         MainWindow.getInstance().simulateButton.setEnabled(false);
-        generations=new Generation[SettingsManager.generations];
+        ChartManager.Reset();
+        generations=new ArrayList<>();
         currentGeneration=0;
-        generations[0]=new Generation();
-        generations[0].GenerateAgents();
-        generations[0].ExecuteAllAgentActions();
+        generations.add(new Generation());
+        generations.get(0).GenerateAgents();
+        generations.get(0).ExecuteAllAgentActions();
+        ChartManager.AddToBestPerGeneration(generations.get(0).GetBestAgent().getScore());
+        ChartManager.AddToMean(generations.get(0).GetMean());
         for(int i=1; i<SettingsManager.generations;i++){
-            generations[i]=new Generation();
+            generations.add(new Generation());
             currentGeneration++;
-            for(int j=0; j<SettingsManager.agentsPerGeneration/2;j++) {
-                Agent[] children =CrossOver.SINGLE_POINT.ApplyCrossOver(ParentSelection.TOURNAMENT_SELECTION.SelectParents(currentGeneration-1));
-                generations[i].AddAgent(MutateAgent(children[0]));
-                generations[i].AddAgent(MutateAgent(children[1]));
+            for(int j=0; j<(SettingsManager.agentsPerGeneration/2);j++) {
+                Agent[] children = CrossOver.SINGLE_POINT.ApplyCrossOver(ParentSelection.TOURNAMENT_SELECTION.SelectParents(currentGeneration - 1));
+                generations.get(1).AddAgent(MutateAgent(children[0]));
+                generations.get(1).AddAgent(MutateAgent(children[1]));
             }
-            generations[i].ExecuteAllAgentActions();
+            generations.get(1).ExecuteAllAgentActions();
             if(i%10==0) {
-                System.out.println("Best agent fitness generation: " + currentGeneration + " fitness: " + generations[i].GetBestAgent().getScore()+" Mean Fitness: "+generations[i].GetMean());
+                System.out.println("Best agent fitness generation: " + currentGeneration +
+                        " fitness: " + generations.get(1).GetBestAgent().getScore()+
+                        " Mean Fitness: "+generations.get(1).GetMean()+
+                        " Efficiency: "+((float)generations.get(1).GetBestAgent().getScore()/(MineGenerator.getInstance().getSpawnedGems()*SettingsManager.gemCollectScore))*100+"%");
             }
+            ChartManager.AddToBestPerGeneration(generations.get(1).GetBestAgent().getScore());
+            ChartManager.AddToMean(generations.get(1).GetMean());
+            generations.remove(0);
         }
         MainWindow.getInstance().startButton.setEnabled(true);
         MainWindow.getInstance().chartButton.setEnabled(true);
@@ -63,7 +74,7 @@ public class SimulationManager {
         return agent;
     }
 
-    public Generation[] getGenerations() {
+    public ArrayList<Generation> getGenerations() {
         return generations;
     }
 
